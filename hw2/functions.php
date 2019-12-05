@@ -7,7 +7,7 @@ function discriminant($a, $b, $c){
             return $d = $b**2 - 4 * $a * $c;
         }
     } else {
-        return 'тип операторов должен быть int или float!';
+        return $d = 'тип операторов должен быть int или float!';
     }
 }
 
