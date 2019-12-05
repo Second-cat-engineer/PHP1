@@ -1,9 +1,6 @@
 <?php
 function discriminant($a, $b, $c){
-    if ((is_int($a) || is_float($a)) && (is_int($b) || is_float($b)) && (is_int($c) || is_float($c))){
-        if (0 == $a) {
-            return null;
-        }
+    if (is_numeric($a) && is_numeric($b) && is_numeric($c) && (0 !== $a) ){
         return $b**2 - 4 * $a * $c;
     }
     return null;
