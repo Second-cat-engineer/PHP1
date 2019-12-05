@@ -2,13 +2,11 @@
 function discriminant($a, $b, $c){
     if ((is_int($a) || is_float($a)) && (is_int($b) || is_float($b)) && (is_int($c) || is_float($c))){
         if (0 == $a) {
-            return $d = null;
-        } else {
-            return $d = $b**2 - 4 * $a * $c;
+            return null;
         }
-    } else {
-        return $d = 'тип операторов должен быть int или float!';
+        return $b**2 - 4 * $a * $c;
     }
+    return null;
 }
 
 assert (-11 === discriminant (5, 3, 1));
