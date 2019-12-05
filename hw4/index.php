@@ -1,3 +1,6 @@
+<?php
+include __DIR__ . '/function.php';
+?>
 <!doctype html>
 <html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -8,10 +11,12 @@
     <title>Comments</title>
 </head>
 <body>
-<h1>Комментарии</h1>
+    <h1>Комментарии</h1>
     <?php
-    include __DIR__ . '/function.php';
-    showComments ()
+        $comments = showComments();
+        foreach ($comments as $comment) {
+            echo $comment; ?><br><?php
+        }
     ?>
     <hr>
     <form action="/hw4/comments.php" method="post">
