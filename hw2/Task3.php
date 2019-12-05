@@ -6,11 +6,11 @@
 //function include() {} // Синтаксическая ошибка, зарезервированное слово
 
 
-function TestWithInclude(){
-    $Test = include (__DIR__ . '/TestWithInclude.php');
-    return $Test;
+function testWithInclude(){
+    $test = include (__DIR__ . '/TestWithInclude.php');
+    return $test;
 }
-var_dump(TestWithInclude());
+var_dump(testWithInclude());
 /*
 1) В случае удачного подключения TestWithInclude.php возвращает (int)1 т.е. true.
 2) В случае если в файле TestWithInclude.php написано return $test = 'TEST', то выведется string(4) "test".
