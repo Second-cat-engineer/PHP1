@@ -6,9 +6,9 @@
 
 include __DIR__ . '/functions.php';
 
-$a = 0;
-$b = '45';
-$c = 1;
+$a = 3;
+$b = 'dsds';
+$c = 2;
 
 $d = discriminant($a, $b, $c);
 
