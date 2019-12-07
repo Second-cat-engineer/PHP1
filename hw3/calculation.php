@@ -50,5 +50,5 @@ if (!is_numeric($a) || !is_numeric($b)) {
         ?>
     </select>
     <input type="text" name="b" value="<?php echo $b ?>">
-    <button type="submit"> =</button><?php echo ' ' . $result ?>
+    <button type="submit"> =</button><?php echo $result ?>
 </form>
