@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/imagesDb.php';
+$images = include __DIR__ . '/imagesDb.php';
 
 foreach ($images as $id => $nameImage) { ?>
     <div>

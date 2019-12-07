@@ -1,16 +1,30 @@
 <?php
 include __DIR__ . '/function.php';
 
-$a = $_GET['a'] ?? null;
-$b = $_GET['b'] ?? null;
-$operation = $_GET['operation'] ?? null;
+if (empty($_GET['a'])) {
+    $a = null;
+} else {
+    $a = $_GET['a'];
+}
+
+if (empty($_GET['b'])) {
+    $b = null;
+} else {
+    $b = $_GET['b'];
+}
+
+if (empty($_GET['operation'])) {
+    $operation = null;
+} else {
+    $operation = $_GET['operation'];
+}
 
 if (!is_numeric($a) || !is_numeric($b)) {
-    $result = 'Введите числа!';
+    $result = null;
 } else {
     $calculation = calculation($a, $operation, $b);
     if (null === $calculation) {
-        $result = 'Ошибка! на 0 делить нельзя';
+        $result = null;
     } else {
         $result = $calculation;
     }
