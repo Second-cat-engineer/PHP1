@@ -1,33 +1,20 @@
 <?php
 include __DIR__ . '/function.php';
 
-if (!isset($_GET['a'])) {
+if (!is_numeric($_GET['a']) || !is_numeric($_GET['b'])) {
     $a = null;
-} else {
-    $a = $_GET['a'];
-}
-
-if (!isset($_GET['b'])) {
     $b = null;
-} else {
-    $b = $_GET['b'];
-}
-
-if (!isset($_GET['operation'])) {
     $operation = null;
-} else {
-    $operation = $_GET['operation'];
-}
-
-if (!is_numeric($a) || !is_numeric($b)) {
     $result = null;
 } else {
+    $a = $_GET['a'];
+    $b = $_GET['b'];
+    $operation = $_GET['operation'];
     $calculation = calculation($operation, $a, $b);
     if (null === $calculation) {
         $result = null;
-    } else {
-        $result = $calculation;
     }
+    $result = $calculation;
 }
 ?>
 <form action="/hw3/calculation.php" method="get">
