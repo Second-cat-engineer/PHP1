@@ -1,6 +1,5 @@
 <?php
-include __DIR__ . '/imagesDb.php';
-$images = getImages();
+$images = include __DIR__ . '/imagesDb.php';
 $id = $_GET['id'];
 
 if (isset($images[$id])) { ?>
