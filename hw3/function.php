@@ -19,7 +19,7 @@ function calculation($operation, $a, $b) {
     }
 }
 
-assert(8 === calculation(5, '+', 3));
-assert(2 === calculation(5, '-', 3));
-assert(15 === calculation(5, '*', 3));
-assert(2 === calculation(6, '/', 3));
+assert(8 === calculation('+',5, 3));
+assert(2 === calculation('-',5, 3));
+assert(15 === calculation('*',5, 3));
+assert(2 === calculation('/',6,  3));
