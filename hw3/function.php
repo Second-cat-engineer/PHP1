@@ -1,5 +1,8 @@
 <?php
-function calculation($a, $b, $operation) {
+function calculation($operation, $a, $b) {
+    if ((0 == $b) && ('/' == $operation)){
+        return null;
+    }
     switch ($operation) {
         case '+':
             return $a + $b;
@@ -11,11 +14,7 @@ function calculation($a, $b, $operation) {
             return $a * $b;
             break;
         case '/';
-            if (0 == $b) {
-                return null;
-            } else {
-                return  $a / $b;
-            }
+            return  $a / $b;
             break;
     }
 }

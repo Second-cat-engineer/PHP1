@@ -1,19 +1,19 @@
 <?php
 include __DIR__ . '/function.php';
 
-if (empty($_GET['a'])) {
+if (!isset($_GET['a'])) {
     $a = null;
 } else {
     $a = $_GET['a'];
 }
 
-if (empty($_GET['b'])) {
+if (!isset($_GET['b'])) {
     $b = null;
 } else {
     $b = $_GET['b'];
 }
 
-if (empty($_GET['operation'])) {
+if (!isset($_GET['operation'])) {
     $operation = null;
 } else {
     $operation = $_GET['operation'];
@@ -22,7 +22,7 @@ if (empty($_GET['operation'])) {
 if (!is_numeric($a) || !is_numeric($b)) {
     $result = null;
 } else {
-    $calculation = calculation($a, $operation, $b);
+    $calculation = calculation($operation, $a, $b);
     if (null === $calculation) {
         $result = null;
     } else {
