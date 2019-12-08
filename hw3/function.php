@@ -1,5 +1,5 @@
 <?php
-function calculation($a, $operation, $b) {
+function calculation($a, $b, $operation) {
     switch ($operation) {
         case '+':
             return $a + $b;
