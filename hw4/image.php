@@ -1,8 +1,7 @@
-<a href = "/hw4/gallery.php">Назад</a>
 <?php
-$nameImage = $_GET['photo'];
+$nameImage = $_GET['image'];
 ?>
-
 <div>
-    <img src="<?php echo $nameImage?>"
+    <img src="/hw4/gallery/<?php echo $nameImage ?>" style="width: 100%">
 </div>
+<a href="/hw4/gallery.php">Назад</a>
