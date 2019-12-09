@@ -1,4 +1,11 @@
 <?php
+function checkExistence($x) {
+    if (isset($x)){
+        return $x;
+    }
+    return null;
+}
+
 function calculation($operation, $a, $b) {
     if ((0 == $b) && ('/' == $operation)){
         return null;
