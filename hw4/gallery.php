@@ -11,7 +11,7 @@ if (isset($_FILES['img'])) {
         echo 'Загрузка файлов с таким расширением запрещена!';
     } elseif (0 === $_FILES ['img'] ['error']) {
         $gallery = showImages();
-        if (isset($nameImg, $gallery)) {
+        if (in_array($nameImg, $gallery)) {
             $nameImg = time() . '.' . $extension;
         }
         move_uploaded_file(
