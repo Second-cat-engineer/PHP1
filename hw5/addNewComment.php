@@ -1,6 +1,6 @@
 <?php
-    if (!empty ($_POST ['comment'])) { //Проверка на существование и на пустоту
-        $comment = $_POST ['comment'];
+    if (!empty ($_POST['comment'])) { //Проверка на существование и на пустоту
+        $comment = $_POST['comment'];
     } else {
         $comment = null;
     }
