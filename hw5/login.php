@@ -2,10 +2,7 @@
 require_once __DIR__ . '/functions.php';
 session_start();
 
-if (!null == getCurrentUser()){
-    header('Location: /hw5/guestBook.php');
-    exit();
-} else {
+if (null === getCurrentUser()){
     $login = checkExistence($_POST ['login']);
     $password = checkExistence($_POST ['password']);
     if (checkPassword($login, $password)) {
@@ -13,6 +10,9 @@ if (!null == getCurrentUser()){
         header ('Location: /hw5/guestBook.php');
         exit();
     }
+} else {
+    header('Location: /hw5/guestBook.php');
+    exit();
 }
 ?>
 <h1> Страница авторизации</h1>

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/functions.php';
 session_start();
-if (!null == getCurrentUser()){
+
+if (null !== getCurrentUser()){
     header('Location: /hw5/guestBook.php');
 }
 ?>
