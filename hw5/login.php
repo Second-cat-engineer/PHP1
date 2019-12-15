@@ -3,8 +3,8 @@ require_once __DIR__ . '/functions.php';
 session_start();
 
 if (null === getCurrentUser()){
-    $login = checkExistence($_POST ['login']);
-    $password = checkExistence($_POST ['password']);
+    $login = checkExistence($_POST['login']);
+    $password = checkExistence($_POST['password']);
     if (checkPassword($login, $password)) {
         $_SESSION['userName'] = $login;
         header ('Location: /hw5/guestBook.php');
