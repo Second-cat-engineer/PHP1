@@ -74,9 +74,10 @@ if (null === getCurrentUser()){
                     <a href="/hw5/registrationForm.php"> регистрацию </a>
                 </p>
             <?php } else { ?>
-                <form action="/hw5/gallery.php" method="post" enctype="multipart/form-data">
-                    <input type = "file" name = "img">
-                    <button type="submit">Загрузить</button>
+                <form action="/hw5/addNewComment.php" method="post">
+                    введите комментарий <br>
+                    <input type="text" name="comment"> <br>
+                    <button type="submit"> Опубликовать </button> <br>
                 </form>
             <?php } ?>
         </div>
