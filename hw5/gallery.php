@@ -2,10 +2,10 @@
 require_once __DIR__ . '/functions.php';
 session_start();
 
-if (!null == getCurrentUser()){
-    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
-} else {
+if (null === getCurrentUser()){
     echo 'Вы вошли как: Гость!';
+} else {
+    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
 }
 
 if (isset($_FILES['img'])) {
@@ -15,13 +15,12 @@ if (isset($_FILES['img'])) {
     $extension = pathinfo($nameImg, PATHINFO_EXTENSION); //возвращет инфу о пути. в данном случае путь у меня
     // то, что указано значением ключа 'name' массива $nameImg. если имя photo.jpg вернет только jpg
 
-    if (!in_array($extension, $allowedExtensions)) { //возвращает булево значение, т.е если
-        //элемент $extension есть в массиве $allowedExtensions то вернет false и условие не выполниться.
+    if (!in_array($extension, $allowedExtensions)) {
         echo 'Загрузка файлов с таким расширением запрещена!';
     } elseif (0 === $_FILES['img']['error']) {
         //Проверка на существование картинки с таким именем
         $gallery = showImages(); // верни массив имен всех файлов, содержащихся в папке gallery
-        if (in_array($nameImg, $gallery)){ // если существует файл с таким именем
+        if (!in_array($nameImg, $gallery)){ // если существует файл с таким именем
             $nameImg = time() . '.' . $extension; // то имя файла будет текущее время + его расширение
         }
         move_uploaded_file (
@@ -87,6 +86,7 @@ if (isset($_FILES['img'])) {
         <div class="row" style="padding-top: 10px">
             <?php
             $images = showImages();
+            var_dump($images);
             foreach ($images as $image) {// Пройди по всем элементам массива и исключи ., .. и Thumbs.db
                 if ($image == '.' || $image ==  '..' || $image == 'Thumbs.db' ) {
                     continue;
@@ -97,7 +97,7 @@ if (isset($_FILES['img'])) {
                     </a>
                     <?php
                         $infoAboutUploadedImages = infoUploadedImages();
-                        if (array_key_exists($image, $infoAboutUploadedImages)) { ?>
+                        if (isset($image, $infoAboutUploadedImages)) { ?>
                             <p> Автор: <?php echo $infoAboutUploadedImages[$image]['author']; ?> </p>
                             <p> Дата загрузки: <?php echo date('Y-m-d H:i:s', $infoAboutUploadedImages[$image]['data']); ?> </p>
                         <?php } ?>
@@ -105,12 +105,7 @@ if (isset($_FILES['img'])) {
             <?php } ?>
         </div>
         <hr>
-        <?php if (!null == getCurrentUser()){ ?>
-            <form action="/hw5/gallery.php" method="post" enctype="multipart/form-data">
-                <input type = "file" name = "img">
-                <button type="submit">Загрузить</button>
-            </form>
-        <?php } else { ?>
+        <?php if (null === getCurrentUser()){ ?>
             <h3> Картинки могут добавлять только авторизованные пользователи </h3>
             <p> Если вы зарегистрированы на сайте, то необходимо
                 <a href="/hw5/login.php"> авторизоваться </a>
@@ -118,6 +113,11 @@ if (isset($_FILES['img'])) {
             <p> Если вы не зарегистрированы, то необходимо пройти
                 <a href="/hw5/registrationForm.php"> регистрацию </a>
             </p>
+        <?php } else { ?>
+            <form action="/hw5/gallery.php" method="post" enctype="multipart/form-data">
+                <input type = "file" name = "img">
+                <button type="submit">Загрузить</button>
+            </form>
         <?php } ?>
     </div>
 </div>

@@ -2,10 +2,10 @@
 require_once __DIR__ . '/functions.php';
 session_start();
 
-if (!null == getCurrentUser()){
-    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
-} else {
+if (null === getCurrentUser()){
     echo 'Вы вошли как: Гость!';
+} else {
+    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
 }
 ?>
 <html>
@@ -65,21 +65,20 @@ if (!null == getCurrentUser()){
                 <?php } ?>
             </div>
             <hr>
-            <?php if (!null == getCurrentUser()){ ?>
-                <form action="/hw5/addNewComment.php" method="post">
-                    введите комментарий <br>
-                    <input type="text" name="comment"> <br>
-                    <button type="submit"> Опубликовать </button> <br>
-                </form>
-                <?php } else { ?>
-                <h3> Комментарии могут добавлять только авторизованные пользователи </h3>
+            <?php if (null === getCurrentUser()){ ?>
+                <h3> Картинки могут добавлять только авторизованные пользователи </h3>
                 <p> Если вы зарегистрированы на сайте, то необходимо
                     <a href="/hw5/login.php"> авторизоваться </a>
                 </p>
                 <p> Если вы не зарегистрированы, то необходимо пройти
                     <a href="/hw5/registrationForm.php"> регистрацию </a>
                 </p>
-                <?php } ?>
+            <?php } else { ?>
+                <form action="/hw5/gallery.php" method="post" enctype="multipart/form-data">
+                    <input type = "file" name = "img">
+                    <button type="submit">Загрузить</button>
+                </form>
+            <?php } ?>
         </div>
     </div>
 </body>

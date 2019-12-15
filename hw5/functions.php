@@ -11,17 +11,13 @@ function getUsersList() {
 }
 
 function existsUser($login) {
-    if (isset(getUsersList()[$login])) {
-       return true;
-    }
+    return isset(getUsersList()[$login]);
 }
 
 function checkPassword($login, $password) {
     if (existsUser($login)) {
         $hashPassword = getUsersList()[$login];
-        if (password_verify($password, $hashPassword)){
-            return true;
-        }
+        return password_verify($password, $hashPassword);
     }
 }
 
