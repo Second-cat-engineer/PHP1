@@ -33,6 +33,6 @@ function showImages() {
     return scandir(__DIR__. '/gallery');
 }
 
-function infoUploadedImages(){ //Функция возвращает информацию о загруженных изображениях в виде массива ['имяФайла' => ['автор' => '', 'датаЗагрузки' => '']]
+function infoUploadedImages(){ //Функция возвращает инфу в виде массива ['имяФайла' => ['автор' => '', 'датаЗагрузки' => '']]
     return unserialize(file_get_contents(__DIR__ . '/infoAboutUploadedImages'));
 }
