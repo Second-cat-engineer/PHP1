@@ -20,7 +20,7 @@ if (isset($_FILES['img'])) {
     } elseif (0 === $_FILES['img']['error']) {
         //Проверка на существование картинки с таким именем
         $gallery = showImages(); // верни массив имен всех файлов, содержащихся в папке gallery
-        if (!in_array($nameImg, $gallery)){ // если существует файл с таким именем
+        if (in_array($nameImg, $gallery)){ // если существует файл с таким именем
             $nameImg = time() . '.' . $extension; // то имя файла будет текущее время + его расширение
         }
         move_uploaded_file (
