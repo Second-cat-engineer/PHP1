@@ -1,17 +1,17 @@
 <?php
-include __DIR__ . '/functions.php';
+require_once __DIR__ . '/functions.php';
+session_start();
 
 if (!null == getCurrentUser()){
     header('Location: /hw5/guestBook.php');
+    exit();
 } else {
-    $login = $_POST ['login'] ?? null; //если в POST есть значение с ключем login, то присвой этому значению имя $login, иначе null
-    $password = $_POST ['password'] ?? null;
-
-    if (checkPassword($login, $password)) { // если пользователь авторизовался
-        $sessionId = hash('sha256', microtime()); // генерируй ему хэш
-        setcookie('sessionId', $sessionId); //установи сгенерированный хэш в виде куки
-        saveUserSession($login, $sessionId); // запиши в файл Логин пользователя и установленную куку
-        header ('Location: /hw5/guestBook.php'); //перенаправь на страницу Гостевой книги
+    $login = checkExistence($_POST ['login']);
+    $password = checkExistence($_POST ['password']);
+    if (checkPassword($login, $password)) {
+        $_SESSION['userName'] = $login;
+        header ('Location: /hw5/guestBook.php');
+        exit();
     }
 }
 ?>

@@ -1,42 +1,41 @@
 <?php
-    include __DIR__ . '/functions.php';
+require_once __DIR__ . '/functions.php';
+session_start();
 
-    if (!null == getCurrentUser()){
-        echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
-    } else {
-        echo 'Вы вошли как: Гость!';
-    }
+if (!null == getCurrentUser()){
+    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
+} else {
+    echo 'Вы вошли как: Гость!';
+}
 
-    if (isset($_FILES['img'])) { //загрузка нового изображения
-        $nameImg = $_FILES['img']['name'];
+if (isset($_FILES['img'])) {
+    $nameImg = $_FILES['img']['name'];
+    // Ограничение загрузки - только файлы png и jpg
+    $allowedExtensions = ['png', 'jpg']; //массив разрешенные разрешения
+    $extension = pathinfo($nameImg, PATHINFO_EXTENSION); //возвращет инфу о пути. в данном случае путь у меня
+    // то, что указано значением ключа 'name' массива $nameImg. если имя photo.jpg вернет только jpg
 
-        // Ограничение загрузки - только файлы png и jpg
-        $allowedExtensions = ['png', 'jpg']; //массив разрешенные разрешения
-        $extension = pathinfo($nameImg, PATHINFO_EXTENSION); //возвращет инфу о пути. в данном случае путь у меня
-        // то, что указано значением ключа 'name' массива $nameImg. если имя photo.jpg вернет только jpg
-
-        if (!in_array($extension, $allowedExtensions)) { //возвращает булево значение, т.е если
-            //элемент $extension есть в массиве $allowedExtensions то вернет false и условие не выполниться.
-            echo 'Загрузка файлов с таким расширением запрещена!';
-        } elseif (0 === $_FILES ['img'] ['error']) {
-            //Проверка на существование картинки с таким именем
-            $gallery = showImages(); // верни массив имен всех файлов, содержащихся в папке gallery
-            if (in_array($nameImg, $gallery)){ // если существует файл с таким именем
-                $nameImg = time() . '.' . $extension; // то имя файла будет текущее время + его расширение
-            }
-            move_uploaded_file (
-                $_FILES ['img'] ['tmp_name'], // возьми из временного хранилища и
-                __DIR__ . '/gallery/' . $nameImg //на сервере сохрани с тем же именем файла, что было на компьютере пользователя
-            );
+    if (!in_array($extension, $allowedExtensions)) { //возвращает булево значение, т.е если
+        //элемент $extension есть в массиве $allowedExtensions то вернет false и условие не выполниться.
+        echo 'Загрузка файлов с таким расширением запрещена!';
+    } elseif (0 === $_FILES['img']['error']) {
+        //Проверка на существование картинки с таким именем
+        $gallery = showImages(); // верни массив имен всех файлов, содержащихся в папке gallery
+        if (in_array($nameImg, $gallery)){ // если существует файл с таким именем
+            $nameImg = time() . '.' . $extension; // то имя файла будет текущее время + его расширение
         }
-
-        // ведите лог (запись в файл) с данными: кто, когда и какое изображение загрузил
-        $infoAboutUploadedImages = infoUploadedImages();
-        $infoAboutUploadedImages[$nameImg]['author'] = getCurrentUser();
-        $infoAboutUploadedImages[$nameImg]['data'] = time();
-        $line = serialize($infoAboutUploadedImages); // Преобразуй массив в строку для записи в файл
-        file_put_contents(__DIR__ . '/infoAboutUploadedImages', $line); //Запиши в файл
+        move_uploaded_file (
+            $_FILES['img']['tmp_name'], // возьми из временного хранилища и
+            __DIR__ . '/gallery/' . $nameImg //на сервере сохрани с тем же именем файла, что было на компьютере пользователя
+        );
     }
+    // ведите лог (запись в файл) с данными: кто, когда и какое изображение загрузил
+    $infoAboutUploadedImages = infoUploadedImages();
+    $infoAboutUploadedImages[$nameImg]['author'] = getCurrentUser();
+    $infoAboutUploadedImages[$nameImg]['data'] = time();
+    $line = serialize($infoAboutUploadedImages);
+    file_put_contents(__DIR__ . '/infoAboutUploadedImages', $line);
+}
 ?>
 <html>
 <head>

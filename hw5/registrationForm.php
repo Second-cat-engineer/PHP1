@@ -1,8 +1,9 @@
 <?php
-    include __DIR__ . '/functions.php';
-    if (!null == getCurrentUser()){
-        header('Location: /hw5/guestBook.php');
-    }
+require_once __DIR__ . '/functions.php';
+session_start();
+if (!null == getCurrentUser()){
+    header('Location: /hw5/guestBook.php');
+}
 ?>
 <h1> Страница регистрации </h1>
 <form action = "/hw5/registration.php" method = "post">

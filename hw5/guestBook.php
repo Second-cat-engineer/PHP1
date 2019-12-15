@@ -1,11 +1,12 @@
 <?php
-    include __DIR__ . '/functions.php';
+require_once __DIR__ . '/functions.php';
+session_start();
 
-    if (!null == getCurrentUser()){
-        echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
-    } else {
-        echo 'Вы вошли как: Гость!';
-    }
+if (!null == getCurrentUser()){
+    echo 'Вы вошли под Логином: ' . getCurrentUser() . '!';
+} else {
+    echo 'Вы вошли как: Гость!';
+}
 ?>
 <html>
 <head>
