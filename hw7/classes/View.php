@@ -21,7 +21,7 @@ class View
         include $template;
         $contentOfTemplate = ob_get_contents();
         ob_end_clean();
-        $contentOfTemplate;
+        return $contentOfTemplate;
     }
 
 }
