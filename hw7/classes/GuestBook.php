@@ -23,7 +23,7 @@ class GuestBook
         return $this->guestBook;
     }
 
-    public function addNewComment($comment)
+    public function addNewComment(GuestBookRecord $comment)
     {
         $this->guestBook[] = $comment;
     }

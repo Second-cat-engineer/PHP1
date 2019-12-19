@@ -3,24 +3,28 @@
 class GuestBookRecord
 {
     protected $comment;
+    protected $author;
+    protected $date;
 
-    public function __construct($comment)
+    public function __construct(array $comment)
     {
-        $this->comment = $comment;
+        $this->comment = $comment['comment'];
+        $this->author = $comment['author'];
+        $this->date = $comment['date'];
     }
 
     public function getComment()
     {
-        return $this->comment['comment'];
+        return $this->comment;
     }
 
     public function getAuthor()
     {
-        return $this->comment['author'];
+        return $this->author;
     }
 
     public function getDate()
     {
-        return $this->comment['date'];
+        return $this->date;
     }
 }

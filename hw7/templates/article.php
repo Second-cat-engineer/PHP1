@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset = "utf-8">
-    <title> Главная страница </title>
+    <title> Станица новостей </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/hw7/templates/style/style.css">
 </head>
@@ -55,27 +55,27 @@
     </div>
 
     <!-- Основная часть сайта -->
-    <div class="row" style="padding-top: 10px">
-        <h1> Гостевая книга </h1>
+    <div class="row" style="padding-top: 10px; text-align: center">
+        <h1> Новости </h1>
         <div class="row" style="padding-top: 10px">
-            <?php
-            foreach ($this->data['GuestBook'] as $comment) { ?>
-                <div class="thumbnail">
-                    <p>
-                        <?php echo $comment->getComment(); ?>
-                    </p>
-                    <h12 style="font-size: 15px">
-                        Автор: <?php echo $comment->getAuthor(); ?> .
-                    </h12><br>
-                    <h12 style="font-size: 15px">
-                        Дата публикации: <?php echo date('Y-m-d H:i:s', $comment->getDate()); ?>
-                    </h12>
+            <div class="thumbnail">
+                <div class="caption">
+                        <h2><?php echo $this->data['Article']->getTitle(); ?></h2>
                 </div>
-            <?php } ?>
+                <div>
+                    <?php echo $this->data['Article']->getText(); ?>
+                </div>
+                <h12 style="font-size: 15px">
+                    Автор статьи:<?php echo $this->data['Article']->getAuthor(); ?>
+                </h12><br>
+                <h12 style="font-size: 15px">
+                    Дата публикации:<?php echo date('Y-m-d H:i:s', $this->data['Article']->getDate()); ?>
+                </h12>
+            </div>
         </div>
         <hr>
         <?php if (null === $this->data['User']->getCurrentUser()){ ?>
-            <h3> Картинки могут добавлять только авторизованные пользователи </h3>
+            <h3> Статьи могут добавлять только авторизованные пользователи </h3>
             <p> Если вы зарегистрированы на сайте, то необходимо
                 <a href="/hw7/login.php"> авторизоваться </a>
             </p>
@@ -83,11 +83,9 @@
                 <a href="/hw7/registration.php"> регистрацию </a>
             </p>
         <?php } else { ?>
-            <form action="/hw7/addNewComment.php" method="post">
-                введите комментарий <br>
-                <input type="text" name="comment"> <br>
-                <button type="submit"> Опубликовать </button> <br>
-            </form>
+            <p> Если вы хотите предложить новость, то нажмите
+                <a href="/hw7/offerArticle.php"> сюда </a>
+            </p>
         <?php } ?>
     </div>
 </div>

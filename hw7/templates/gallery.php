@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset = "utf-8">
-    <title> Главная страница </title>
+    <title> Станица новостей </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/hw7/templates/style/style.css">
 </head>
@@ -56,20 +56,16 @@
 
     <!-- Основная часть сайта -->
     <div class="row" style="padding-top: 10px">
-        <h1> Гостевая книга </h1>
+
+        <h1> Галлерея изображений </h1>
         <div class="row" style="padding-top: 10px">
-            <?php
-            foreach ($this->data['GuestBook'] as $comment) { ?>
-                <div class="thumbnail">
-                    <p>
-                        <?php echo $comment->getComment(); ?>
-                    </p>
-                    <h12 style="font-size: 15px">
-                        Автор: <?php echo $comment->getAuthor(); ?> .
-                    </h12><br>
-                    <h12 style="font-size: 15px">
-                        Дата публикации: <?php echo date('Y-m-d H:i:s', $comment->getDate()); ?>
-                    </h12>
+            <?php foreach ($this->data['Gallery'] as $image) { ?>
+                <div class="col-xs-6 col-md-4">
+                    <a href = "">
+                        <img src="/hw7/gallery/<?php echo $image->getNameImage() ?>" style = "width: 300px">
+                    </a>
+                        <p> Автор: <?php echo $image->getAuthorImage(); ?> </p>
+                        <p> Дата загрузки: <?php echo date('Y-m-d H:i:s', $image->getDateUploaded()) ?> </p>
                 </div>
             <?php } ?>
         </div>
@@ -83,10 +79,9 @@
                 <a href="/hw7/registration.php"> регистрацию </a>
             </p>
         <?php } else { ?>
-            <form action="/hw7/addNewComment.php" method="post">
-                введите комментарий <br>
-                <input type="text" name="comment"> <br>
-                <button type="submit"> Опубликовать </button> <br>
+            <form action="/hw7/addNewImage.php" method="post" enctype="multipart/form-data">
+                <input type = "file" name = "img">
+                <button type="submit">Загрузить</button>
             </form>
         <?php } ?>
     </div>

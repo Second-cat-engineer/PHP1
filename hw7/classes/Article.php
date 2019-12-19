@@ -3,17 +3,15 @@
 
 class Article
 {
-    protected $article;
     protected $title;
-    protected $body;
+    protected $text;
     protected $author;
     protected $date;
 
-    public function __construct($article)
+    public function __construct(array $article)
     {
-        $this->article = $article;
         $this->title = $article['title'];
-        $this->body = $article['body'];
+        $this->text = $article['text'];
         $this->author = $article['author'];
         $this->date = $article['date'];
     }
@@ -23,9 +21,9 @@ class Article
         return $this->title;
     }
 
-    public function getBody()
+    public function getText()
     {
-        return $this->body;
+        return $this->text;
     }
 
     public function getAuthor()
@@ -36,10 +34,5 @@ class Article
     public function getDate()
     {
         return $this->date;
-    }
-
-    public function getArticle()
-    {
-        return $this->article;
     }
 }

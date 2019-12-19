@@ -9,18 +9,13 @@ class News
     public function __construct()
     {
         $this->pathToNews = __DIR__ . '/../db/news';
-        $this->news = $this->loadNews();
-    }
-
-    protected function loadNews()
-    {
         $data = file($this->pathToNews, FILE_IGNORE_NEW_LINES);
         $news = [];
-        foreach ($data as $value) {
-            $article = unserialize($value);
+        foreach ($data as $datum) {
+            $article = unserialize($datum);
             $news[] = new Article($article);
         }
-        return $news;
+        $this->news = $news;
     }
 
     public function getAllNews()
@@ -30,16 +25,20 @@ class News
 
     public function addNewArticle(Article $article)
     {
-        $news = $this->news;
-        $news[] = $article;
-        $this->news = $news;
+        $this->news[] = $article;
     }
 
-    public function saveArticle()
+    public function saveNewArticle()
     {
         $news = [];
         foreach ($this->news as $article){
-            $news[] = serialize($article->getArticle());
+            $article = [
+                'title' => $article->getTitle(),
+                'text' => $article->getText(),
+                'author' => $article->getAuthor(),
+                'date' => $article->getDate(),
+            ];
+            $news[] = serialize($article);
         }
         $file = implode("\n", $news);
         file_put_contents($this->pathToNews, $file);
