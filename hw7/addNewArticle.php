@@ -8,13 +8,13 @@ $users = new Users();
 if (empty($_POST['title'] || $_POST['text'])) {
     header('Location: /hw7/offerArticle.php');
     exit();
-} else {
-    $article = [];
-    $article['title'] = $_POST['title'];
-    $article['text'] = $_POST['text'];
-    $article['author'] = $users->getCurrentUser();
-    $article['date'] = time();
 }
+$article = [];
+$article['title'] = $_POST['title'];
+$article['text'] = $_POST['text'];
+$article['author'] = $users->getCurrentUser();
+$article['date'] = time();
+
 
 $article = new Article($article);
 $news = new News();
