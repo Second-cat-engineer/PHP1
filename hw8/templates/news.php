@@ -32,18 +32,18 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="thumbnail">
                         <div class="caption">
-                            <a href="/hw8/article.php?id=<?php echo $article->id ?>">
-                                <h2><?php echo $article->title; ?></h2>
+                            <a href="/hw8/article.php?id=<?php echo $article['id'] ?>">
+                                <h2><?php echo $article['title']; ?></h2>
                             </a>
                         </div>
                         <div>
-                            <?php echo substr($article->text, 0, 52); ?>
+                            <?php echo substr($article['text'], 0, 52); ?>
                         </div>
                         <h12 style="font-size: 15px">
-                            Автор статьи:<?php echo $article->author; ?>
+                            Автор статьи:<?php echo $article['author']; ?>
                         </h12><br>
                         <h12 style="font-size: 15px">
-                            Дата публикации:<?php echo date('Y-m-d H:i:s', $article->date); ?>
+                            Дата публикации:<?php echo date('Y-m-d H:i:s', $article['date']); ?>
                         </h12>
                     </div>
                 </div>

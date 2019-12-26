@@ -2,18 +2,16 @@
 require_once __DIR__ . '/classes/DB.php';
 require_once __DIR__ . '/classes/View.php';
 
-//var_dump($_GET);
-
 if (empty($_GET['id'])) {
     header('Location: /hw8/news.php');
     exit();
 }
+$idArticle[':id'] = $_GET['id'];
 
 $news = new DB();
-$news->execute('SELECT * FROM news');
-$data = $news->query('SELECT * FROM news WHERE id=:id', $_GET);
+$data = $news->query('SELECT * FROM news WHERE id=:id', $idArticle);
 
-if (empty($data)) {
+if ((false === $data) || empty($data)) {
     header('Location: /hw8/news.php');
     exit();
 }

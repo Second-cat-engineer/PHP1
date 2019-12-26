@@ -4,7 +4,6 @@
 class DB
 {
     protected $dbh;
-    protected $result;
 
     public function __construct()
     {
@@ -13,19 +12,24 @@ class DB
         $this->dbh = new PDO ($dsn, $config['user'], $config['password']);
     }
 
-    public function execute(string $sql)
+    public function execute(string $sql, array $data = [])
     {
         $sth = $this->dbh->prepare($sql);
-        return $this->result = $sth->execute();
+        return $sth->execute($data);
     }
 
-    public function query(string $sql, array $data)
+    public function query(string $sql, array $data = [])
     {
-        if (false === $this->result) {
+        $sth = $this->dbh->prepare($sql);
+        if (false === $sth->execute($data)) {
             return false;
         }
-        $sth = $this->dbh->prepare($sql);
-        $sth->execute($data);
-        return $sth->fetchAll(PDO::FETCH_OBJ);
+        return $sth->fetchAll();
     }
 }
+
+/*
+$news = new DB();
+$data = $news->query('SELECT * FROM news ORDER BY date');
+var_dump($data);
+*/

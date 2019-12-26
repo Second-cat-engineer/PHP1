@@ -3,9 +3,7 @@ require_once __DIR__ . '/classes/DB.php';
 require_once __DIR__ . '/classes/View.php';
 
 $news = new DB();
-
-$news->execute('SELECT * FROM news');
-$data = $news->query('SELECT * FROM news ORDER BY date', []);
+$data = $news->query('SELECT * FROM news ORDER BY date');
 
 $view = new View();
 $view->assign('News', $data);

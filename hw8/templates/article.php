@@ -29,16 +29,16 @@
         <div class="row" style="padding-top: 10px">
             <div class="thumbnail">
                 <div class="caption">
-                        <h2><?php echo $this->data['Article'][0]->title; ?></h2>
+                        <h2><?php echo $this->data['Article'][0]['title']; ?></h2>
                 </div>
                 <div style="text-align: left">
-                    <?php echo $this->data['Article'][0]->text; ?>
+                    <?php echo $this->data['Article'][0]['text']; ?>
                 </div><br>
                 <h12 style="font-size: 15px">
-                    Автор статьи:<?php echo $this->data['Article'][0]->author; ?>
+                    Автор статьи:<?php echo $this->data['Article'][0]['author']; ?>
                 </h12><br>
                 <h12 style="font-size: 15px">
-                    Дата публикации:<?php echo date('Y-m-d H:i:s', $this->data['Article'][0]->date); ?>
+                    Дата публикации:<?php echo date('Y-m-d H:i:s', $this->data['Article'][0]['date']); ?>
                 </h12>
             </div>
         </div>
