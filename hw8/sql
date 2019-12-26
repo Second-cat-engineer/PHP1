@@ -1,0 +1,2 @@
+CREATE TABLE news (id SERIAL, title VARCHAR(512), text TEXT, author VARCHAR(100), date INT);
+INSERT INTO news (title, text, author, date) VALUES ('Это тестовая новость', 'Это текст тестовой новости', 'Автор', 1523025632);
